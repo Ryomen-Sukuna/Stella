@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -17,11 +17,10 @@
 
 from Stella import StellaDB
 
-log_channels  = StellaDB.log_channels 
+log_channels = StellaDB.log_channels
+
 
 def __stats__():
     TOTAL_CONNECTED_CHATS = log_channels.count_documents({})
-    text = (
-        f'`{TOTAL_CONNECTED_CHATS}` chats are setted their logs channels.\n'
-    )
+    text = f"`{TOTAL_CONNECTED_CHATS}` chats are setted their logs channels.\n"
     return text

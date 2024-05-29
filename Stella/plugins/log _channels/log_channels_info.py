@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -21,7 +21,7 @@ __help__ = (
     "Recent actions are nice, but they don't help you log every action taken by the bot. This is why you need log channels!\n\n"
     "Log channels can help you keep track of exactly what the other admins are doing. Bans, Mutes, warns, notes - everything can be moderated.\n\n"
     "Setting a log channel is done by the following steps:\n"
-    "- Add Stella to your channel, as an admin. This is done via the \"add administrators\" tab.\n"
+    '- Add Stella to your channel, as an admin. This is done via the "add administrators" tab.\n'
     "- Send /setlog to your channel.\n"
     "- Forward the /setlog command to the group you wish to be logged.\n"
     "- Congrats! all done :)\n\n"

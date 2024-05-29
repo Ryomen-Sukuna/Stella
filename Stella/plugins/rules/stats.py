@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -19,10 +19,8 @@ from Stella import StellaDB
 
 rules = StellaDB.rules
 
+
 def __stats__():
     TOTAL_RULE_CHATS = rules.count_documents({})
-    text = (
-        f"`{TOTAL_RULE_CHATS}` rules are setted in chats.\n"
-    )
+    text = f"`{TOTAL_RULE_CHATS}` rules are setted in chats.\n"
     return text
-        

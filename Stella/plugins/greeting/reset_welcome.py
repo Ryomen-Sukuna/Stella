@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -16,7 +16,6 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from pyrogram.methods import password
 from Stella import StellaCli
 from Stella.database.welcome_mongo import UnSetWelcome
 from Stella.helper import custom_filter
@@ -25,7 +24,7 @@ from Stella.helper.chat_status import isUserCan
 from Stella.plugins.connection.connection import connection
 
 
-@StellaCli.on_message(custom_filter.command(commands=('resetwelcome')))
+@StellaCli.on_message(custom_filter.command(commands=("resetwelcome")))
 @anonadmin_checker
 async def ResetWelcome(client, message):
 
@@ -34,13 +33,9 @@ async def ResetWelcome(client, message):
     else:
         chat_id = message.chat.id
 
-    if not await isUserCan(message, permissions='can_change_info'):
+    if not await isUserCan(message, permissions="can_change_info"):
         return
 
     UnSetWelcome(chat_id)
 
-    await message.reply(
-        "The welcome message has been reset to default!",
-        quote=True
-    )
-
+    await message.reply("The welcome message has been reset to default!", quote=True)

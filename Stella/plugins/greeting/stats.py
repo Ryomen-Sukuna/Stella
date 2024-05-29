@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -18,12 +18,11 @@
 
 from Stella import StellaDB
 
-welcome = StellaDB.welcome 
+welcome = StellaDB.welcome
+
 
 def __stats__():
     TOTAL_WELCOME_CHATS = welcome.count_documents({})
-    text = (
-        f'owo, I\'m welcoming in `{TOTAL_WELCOME_CHATS}` chats.\n'
-    )
+    text = f"owo, I'm welcoming in `{TOTAL_WELCOME_CHATS}` chats.\n"
 
     return text

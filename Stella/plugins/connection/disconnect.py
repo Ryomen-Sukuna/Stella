@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -22,24 +22,14 @@ from Stella.helper import custom_filter
 from Stella.plugins.connection.connection import connection
 
 
-@StellaCli.on_message(custom_filter.command(commands=('disconnect')))
+@StellaCli.on_message(custom_filter.command(commands=("disconnect")))
 async def diconnectChat(client, message):
-    user_id = message.from_user.id 
-    if not (
-        message.chat.type == 'private'
-    ):
-        await message.reply(
-            "You need to be in PM to use this."
-        )
+    user_id = message.from_user.id
+    if not (message.chat.type == "private"):
+        await message.reply("You need to be in PM to use this.")
         return
     if await connection(message) is not None:
         disconnectChat(user_id)
-        await message.reply(
-            "Disconnected from chat.",
-            quote=True
-        )
+        await message.reply("Disconnected from chat.", quote=True)
     else:
-        await message.reply(
-            "You aren't connected to any chats :)",
-            quote=True
-        )
+        await message.reply("You aren't connected to any chats :)", quote=True)

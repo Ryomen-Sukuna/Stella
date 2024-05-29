@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -21,11 +21,13 @@ from typing import List, Union
 
 from pyrogram.filters import create
 from pyrogram.types import Message
+
 from Stella import BOT_USERNAME, PREFIX
 
-# Global variables for dmins commands, connection admin commands & connection user commands 
+# Global variables for dmins commands, connection admin commands & connection user commands
 DISABLE_COMMANDS = []
 COMMANDS_LIST = []
+
 
 def command_lister(commands: Union[str, List[str]], disable: bool = False) -> list:
     if isinstance(commands, str):
@@ -36,6 +38,7 @@ def command_lister(commands: Union[str, List[str]], disable: bool = False) -> li
         if disable:
             for command in commands:
                 DISABLE_COMMANDS.append(command)
+
 
 def commandsHelper(commands: Union[str, List[str]]) -> list:
     if isinstance(commands, str):
@@ -48,7 +51,7 @@ def commandsHelper(commands: Union[str, List[str]]) -> list:
             username_command = f"{command}@{BOT_USERNAME}"
             COMMANDS_LIST.append(command)
             COMMANDS_LIST.append(username_command)
-    
+
     return COMMANDS_LIST
 
 
@@ -57,12 +60,13 @@ def command(
     prefixes: Union[str, List[str]] = PREFIX,
     case_sensitive: bool = False,
     disable: bool = False,
-    ):
-    
+):
+
     command_lister(commands, disable)
     commands = commandsHelper(commands)
-    
+
     command_re = re.compile(r"([\"'])(.*?)(?<!\\)\1|(\S+)")
+
     async def func(flt, _, message: Message):
         text = message.text or message.caption
         message.command = None
@@ -76,7 +80,7 @@ def command(
             if not text.startswith(prefix):
                 continue
 
-            without_prefix = text[len(prefix):]
+            without_prefix = text[len(prefix) :]
 
             for cmd in flt.commands:
                 if not re.match(pattern.format(re.escape(cmd)), without_prefix):
@@ -88,7 +92,7 @@ def command(
                 # Remove the escape character from the arguments
                 message.command = [cmd] + [
                     re.sub(r"\\([\"'])", r"\1", m.group(2) or m.group(3) or "")
-                    for m in command_re.finditer(without_prefix[len(cmd):])
+                    for m in command_re.finditer(without_prefix[len(cmd) :])
                 ]
 
                 return True
@@ -107,5 +111,5 @@ def command(
         "CommandFilter",
         commands=commands,
         prefixes=prefixes,
-        case_sensitive=case_sensitive
+        case_sensitive=case_sensitive,
     )

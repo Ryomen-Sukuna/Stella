@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -24,45 +24,31 @@ from Stella.database.federation_mongo import new_fed_db
 from Stella.helper import custom_filter
 
 
-@StellaCli.on_message(custom_filter.command(commands=('newfed')))
+@StellaCli.on_message(custom_filter.command(commands=("newfed")))
 async def NewFed(client, message):
 
-    if (
-        message.chat.type == 'supergroup'
-    ):
-        await message.reply(
-            'Create your federation in my PM - not in a group.'
-        )
-        return 
-
-    if not (
-        len(message.command) >= 2
-    ):
-        await message.reply(
-            "Give your federation a name!"
-        )  
+    if message.chat.type == "supergroup":
+        await message.reply("Create your federation in my PM - not in a group.")
         return
 
-    if (
-        message.from_user.id in TELEGRAM_SERVICES_IDs
-    ):
+    if not (len(message.command) >= 2):
+        await message.reply("Give your federation a name!")
+        return
+
+    if message.from_user.id in TELEGRAM_SERVICES_IDs:
         await message.reply(
             "This is telegram services IDs, I should not create any new fed for it."
         )
         return
 
-    if (
-        len(' '.join(message.command[1:])) > 60
-    ):
-        await message.reply(
-            "Your fed must be smaller than 60 words."
-        )
+    if len(" ".join(message.command[1:])) > 60:
+        await message.reply("Your fed must be smaller than 60 words.")
         return
 
-    fed_name = ' '.join(message.command[1:])
+    fed_name = " ".join(message.command[1:])
     fed_id = str(uuid.uuid4())
-    owner_id = message.from_user.id 
-    created_time = time.ctime() 
+    owner_id = message.from_user.id
+    created_time = time.ctime()
 
     new_fed_db(fed_name, fed_id, created_time, owner_id)
 
@@ -82,5 +68,5 @@ async def NewFed(client, message):
             f"`{fed_id}`\n"
             f"OwnerID: `{owner_id}`\n"
             f"Created at `{created_time}`"
-        )
+        ),
     )
