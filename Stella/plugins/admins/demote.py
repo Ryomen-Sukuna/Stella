@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -17,31 +17,29 @@
 
 
 from pyrogram.types import ChatPermissions
+
 from Stella import BOT_ID, StellaCli
 from Stella.helper import custom_filter
 from Stella.helper.anon_admin import anonadmin_checker
-from Stella.helper.chat_status import (CheckAllAdminsStuffs,
-                                       can_restrict_member, isUserAdmin)
+from Stella.helper.chat_status import CheckAllAdminsStuffs, isUserAdmin
 from Stella.helper.get_user import get_user_id
 
 
-@StellaCli.on_message(custom_filter.command(commands=('demote')))
+@StellaCli.on_message(custom_filter.command(commands=("demote")))
 @anonadmin_checker
 async def promote(client, message):
 
-    if not await CheckAllAdminsStuffs(message, permissions='can_promote_members'):
+    if not await CheckAllAdminsStuffs(message, permissions="can_promote_members"):
         return
-    
+
     user_info = await get_user_id(message)
     user_id = user_info.id
-    chat_id = message.chat.id 
-    
+    chat_id = message.chat.id
+
     if user_id == BOT_ID:
-        await message.reply(
-            "I'm not going to demote myself."
-        )
+        await message.reply("I'm not going to demote myself.")
         return
-    
+
     if not await isUserAdmin(message, user_id=user_id, silent=True):
         await message.reply(
             "This person isn't an admin. How am I supposed to demote them?"
@@ -56,14 +54,11 @@ async def promote(client, message):
                 can_send_messages=True,
                 can_pin_messages=False,
                 can_invite_users=False,
-                can_change_info=False
-            )
+                can_change_info=False,
+            ),
         )
     except:
-        user_data = await StellaCli.get_chat_member(
-            chat_id=chat_id,
-            user_id=user_id
-            )
+        user_data = await StellaCli.get_chat_member(chat_id=chat_id, user_id=user_id)
 
         await message.reply(
             (
@@ -73,9 +68,4 @@ async def promote(client, message):
         )
         return
 
-    await message.reply(
-        f"{user_info.mention} has been demoted!"
-    )
-    
-
-
+    await message.reply(f"{user_info.mention} has been demoted!")

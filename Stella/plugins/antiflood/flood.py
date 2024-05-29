@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -17,22 +17,23 @@
 
 
 from Stella import StellaCli
-from Stella.database.antiflood_mongo import (get_antiflood_mode, get_flood,
-                                             get_floodlimit)
+from Stella.database.antiflood_mongo import (
+    get_antiflood_mode,
+    get_flood,
+    get_floodlimit,
+)
 from Stella.helper import custom_filter
 from Stella.helper.time_checker import time_string_helper
 
 
-@StellaCli.on_message(custom_filter.command(commands=('flood')))
+@StellaCli.on_message(custom_filter.command(commands=("flood")))
 async def flood(client, message):
 
     chat_id = message.chat.id
     if not get_flood(chat_id):
-        await message.reply(
-            "This chat isn't currently enforcing flood control."
-        )
-        return 
-    
+        await message.reply("This chat isn't currently enforcing flood control.")
+        return
+
     FLOOD_LIMIT = get_floodlimit(chat_id)
     FLOOD_MODE, FLOOD_TIME = get_antiflood_mode(chat_id)
     text = (
@@ -51,6 +52,4 @@ async def flood(client, message):
         time_limit, time_format = time_string_helper(FLOOD_TIME)
         text += f"Any user that sends more than that amount of messages will be temporarily muted for {time_limit} {time_format}."
 
-    await message.reply(
-        text
-    )
+    await message.reply(text)

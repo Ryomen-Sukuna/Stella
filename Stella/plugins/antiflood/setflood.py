@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -24,7 +24,7 @@ from Stella.helper import custom_filter
 from Stella.helper.chat_status import CheckAllAdminsStuffs, isBotAdmin
 
 
-@StellaCli.on_message(custom_filter.command(commands=('setflood')))
+@StellaCli.on_message(custom_filter.command(commands=("setflood")))
 async def setflood(client, message):
 
     chat_id = message.chat.id
@@ -36,35 +36,23 @@ async def setflood(client, message):
         )
         return
 
-    if not await CheckAllAdminsStuffs(message, permissions='can_restrict_members'):
+    if not await CheckAllAdminsStuffs(message, permissions="can_restrict_members"):
         return
-    
-    if not (
-        len(message.command) >= 2
-    ):
+
+    if not (len(message.command) >= 2):
         await message.reply(
-            'I was expecting some arguments but turned out you\'re an exception to people that have a functioning brain! \nEither off, or an integer. eg: `/setflood 5`, or `/setflood off` will work'
+            "I was expecting some arguments but turned out you're an exception to people that have a functioning brain! \nEither off, or an integer. eg: `/setflood 5`, or `/setflood off` will work"
         )
         return
-    
+
     arg = message.command[1]
 
-    if (
-        arg == 'off'
-        or (
-            arg.isdigit()
-            and int(arg) == 0
-        )
-    ):
+    if arg == "off" or (arg.isdigit() and int(arg) == 0):
         setflood_db(chat_id, False)
-        await message.reply(
-            "I've disable antiflood."
-        )
+        await message.reply("I've disable antiflood.")
         return
-    
-    elif (
-        arg.isdigit()
-    ):
+
+    elif arg.isdigit():
         if int(arg) > 75:
             await message.reply(
                 "The flood limit is 75. You can set a value between 0 and 75."
@@ -75,6 +63,4 @@ async def setflood(client, message):
                 f"Antiflood settings for {html.escape(chat_title)} have been updated and the flood limit is changed to `{arg}`."
             )
     else:
-        await message.reply(
-            f"{arg} is not a valid integer."
-        )
+        await message.reply(f"{arg} is not a valid integer.")

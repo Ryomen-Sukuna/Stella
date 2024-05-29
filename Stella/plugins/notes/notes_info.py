@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -24,7 +24,7 @@ __help__ = (
     "- /get `<notename>`: Get a note.\n"
     "- `#notename`: Same as /get.\n\n"
     "Admin commands:\n"
-    "- /save `<notename> <note text>`: Save a new note called \"word\". Replying to a message will save that message. Even works on media!n\n"
+    '- /save `<notename> <note text>`: Save a new note called "word". Replying to a message will save that message. Even works on media!n\n'
     "- /clear `<notename>`: Delete the associated note.\n"
     "- /notes: List all notes in the current chat.\n"
     "- /saved: Same as `/notes`.\n"

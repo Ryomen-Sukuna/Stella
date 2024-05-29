@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -23,7 +23,7 @@ from Stella.helper.chat_status import isUserCan
 from Stella.plugins.connection.connection import connection
 
 
-@StellaCli.on_message(custom_filter.command(commands=('unsetlog')))
+@StellaCli.on_message(custom_filter.command(commands=("unsetlog")))
 @anonadmin_checker
 async def unset_log(client, message):
 
@@ -31,14 +31,13 @@ async def unset_log(client, message):
         chat_id = await connection(message)
     else:
         chat_id = message.chat.id
-    
-    if not await isUserCan(message, permissions='can_change_info'):
+
+    if not await isUserCan(message, permissions="can_change_info"):
         return
 
     unset_log_db(chat_id)
 
     await message.reply(
         "Successfully unset log channel. Admin actions will no longer be logged.",
-        quote=True
+        quote=True,
     )
-    

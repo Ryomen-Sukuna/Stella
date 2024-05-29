@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -21,41 +21,36 @@ from Stella.database.welcome_mongo import isReCaptcha, setReCaptcha
 from Stella.helper import custom_filter
 from Stella.helper.chat_status import isUserAdmin
 
-RECAPTCHA_TRUE = ['on', 'yes']
-RECAPTCHA_FALSE = ['off', 'no']
+RECAPTCHA_TRUE = ["on", "yes"]
+RECAPTCHA_FALSE = ["off", "no"]
 
-@StellaCli.on_message(custom_filter.command('recaptcha'))
+
+@StellaCli.on_message(custom_filter.command("recaptcha"))
 async def reCaptcha(client, message):
 
-    chat_id = message.chat.id 
+    chat_id = message.chat.id
 
     if not await isUserAdmin(message):
         return
-        
-    if (
-        len(message.command) >= 2
-    ):
+
+    if len(message.command) >= 2:
         command_arg = message.command[1]
-        
-        if (
-            command_arg in RECAPTCHA_TRUE
-        ):
+
+        if command_arg in RECAPTCHA_TRUE:
             setReCaptcha(chat_id=chat_id, reCaptcha=True)
             await message.reply(
-                "From now on, I'll ask the CAPTCHA to every new user; regardless of whether they'd joined the chat before and verified themselves."    
+                "From now on, I'll ask the CAPTCHA to every new user; regardless of whether they'd joined the chat before and verified themselves."
             )
-            
-        elif (
-            command_arg in RECAPTCHA_FALSE
-        ):
+
+        elif command_arg in RECAPTCHA_FALSE:
             setReCaptcha(chat_id=chat_id, reCaptcha=False)
             await message.reply(
                 "I won't ask the CAPTCHA to users that have joined the chat before and already verified themselves."
             )
-        
+
         else:
             await message.reply(
-                f'This isn\'t a boolean - excpected one of yes/on or no/off: got: {command_arg}'
+                f"This isn't a boolean - excpected one of yes/on or no/off: got: {command_arg}"
             )
 
     else:
@@ -68,4 +63,4 @@ async def reCaptcha(client, message):
             await message.reply(
                 "reCAPTCHA: **disabled**; I'm not asking the CAPTCHA to people who have joined before and verified themselves.\n\n"
                 "To chnage this setting, try this command again followed by one of yes/no/on/off"
-            )    
+            )

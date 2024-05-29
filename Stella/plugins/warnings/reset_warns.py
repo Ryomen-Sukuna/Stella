@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -22,19 +22,19 @@ from Stella.helper.chat_status import isUserAdmin
 from Stella.helper.get_user import get_user_id
 
 
-@StellaCli.on_message(custom_filter.command(commands=('resetwarn')))
+@StellaCli.on_message(custom_filter.command(commands=("resetwarn")))
 async def reset_warn(client, message):
-    chat_id = message.chat.id 
+    chat_id = message.chat.id
 
     if not await isUserAdmin(message):
         return
 
     user_info = await get_user_id(message)
-    user_id = user_info.id 
+    user_id = user_info.id
     warn_num = count_user_warn(chat_id, user_id)
 
     print(warn_num)
-    
+
     if warn_num is None:
         await message.reply(
             f"User {user_info.mention} has no warnings to delete! What are you trying to acheive?"

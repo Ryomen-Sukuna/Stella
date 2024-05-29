@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -22,32 +22,22 @@ from Stella.helper import custom_filter
 from Stella.helper.chat_status import isUserAdmin
 
 
-@StellaCli.on_message(custom_filter.command('stop'))
+@StellaCli.on_message(custom_filter.command("stop"))
 async def stop(client, message):
 
     chat_id = message.chat.id
 
     if not await isUserAdmin(message):
         return
-    
-    if not (
-        len(message.command) >= 2
-    ):
-        await message.reply(
-            'Not enough arguments provided.'
-        )
+
+    if not (len(message.command) >= 2):
+        await message.reply("Not enough arguments provided.")
         return
-    
+
     filter_name = message.command[1]
-    if (
-        filter_name not in get_filters_list(chat_id)
-    ):
-        await message.reply(
-            'You haven\'t saved any filters on this word yet!'
-        )
+    if filter_name not in get_filters_list(chat_id):
+        await message.reply("You haven't saved any filters on this word yet!")
         return
-    
+
     stop_db(chat_id, filter_name)
-    await message.reply(
-        f'I\'ve stopped `{filter_name}`.'
-    )
+    await message.reply(f"I've stopped `{filter_name}`.")

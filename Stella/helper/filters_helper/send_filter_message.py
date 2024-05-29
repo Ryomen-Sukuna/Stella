@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -17,17 +17,20 @@
 
 
 from pyrogram.types import InlineKeyboardMarkup, Message
+
 from Stella import StellaCli
 from Stella.helper.button_gen import button_markdown_parser
 from Stella.helper.note_helper.note_fillings import NoteFillings
 
 
-async def SendFilterMessage(message: Message, filter_name: str, content: str, text: str, data_type: int):
-    
+async def SendFilterMessage(
+    message: Message, filter_name: str, content: str, text: str, data_type: int
+):
+
     chat_id = message.chat.id
     message_id = message.message_id
     text, buttons = button_markdown_parser(text)
-    
+
     text = NoteFillings(message, text)
     # Check if button button len is Zero then reply_markup=None
     reply_markup = None
@@ -41,7 +44,7 @@ async def SendFilterMessage(message: Message, filter_name: str, content: str, te
             chat_id=chat_id,
             text=text,
             reply_markup=reply_markup,
-            reply_to_message_id=message_id
+            reply_to_message_id=message_id,
         )
 
     elif data_type == 2:
@@ -49,15 +52,15 @@ async def SendFilterMessage(message: Message, filter_name: str, content: str, te
             chat_id=chat_id,
             sticker=content,
             reply_markup=reply_markup,
-            reply_to_message_id=message_id
+            reply_to_message_id=message_id,
         )
-        
-    elif data_type ==3:
+
+    elif data_type == 3:
         await StellaCli.send_animation(
             chat_id=chat_id,
             animation=content,
             reply_markup=reply_markup,
-            reply_to_message_id=message_id
+            reply_to_message_id=message_id,
         )
 
     elif data_type == 4:
@@ -66,7 +69,7 @@ async def SendFilterMessage(message: Message, filter_name: str, content: str, te
             document=content,
             caption=text,
             reply_markup=reply_markup,
-            reply_to_message_id=message_id
+            reply_to_message_id=message_id,
         )
 
     elif data_type == 5:
@@ -75,40 +78,40 @@ async def SendFilterMessage(message: Message, filter_name: str, content: str, te
             photo=content,
             caption=text,
             reply_markup=reply_markup,
-            reply_to_message_id=message_id
+            reply_to_message_id=message_id,
         )
-    
+
     elif data_type == 6:
         await StellaCli.send_audio(
             chat_id=chat_id,
             audio=content,
             caption=text,
             reply_markup=reply_markup,
-            reply_to_message_id=message_id
+            reply_to_message_id=message_id,
         )
-    
+
     elif data_type == 7:
         await StellaCli.send_voice(
             chat_id=chat_id,
             voice=content,
             caption=text,
             reply_markup=reply_markup,
-            reply_to_message_id=message_id
+            reply_to_message_id=message_id,
         )
-    
+
     elif data_type == 8:
         await StellaCli.send_video(
             chat_id=chat_id,
             video=content,
             caption=text,
             reply_markup=reply_markup,
-            reply_to_message_id=message_id
+            reply_to_message_id=message_id,
         )
-    
+
     elif data_type == 9:
         await StellaCli.send_video_note(
             chat_id=chat_id,
             video_note=content,
             reply_markup=reply_markup,
-            reply_to_message_id=message_id
+            reply_to_message_id=message_id,
         )

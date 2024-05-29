@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -25,7 +25,7 @@ from Stella.helper.welcome_helper.get_welcome_message import GetWelcomeMessage
 from Stella.plugins.connection.connection import connection
 
 
-@StellaCli.on_message(custom_filter.command(commands=('setgoodbye')))
+@StellaCli.on_message(custom_filter.command(commands=("setgoodbye")))
 @anonadmin_checker
 async def set_goodbye(client, message):
 
@@ -34,31 +34,15 @@ async def set_goodbye(client, message):
     else:
         ChatID = message.chat.id
 
-    if not await isUserCan(message, permissions='can_change_info'):
+    if not await isUserCan(message, permissions="can_change_info"):
         return
 
-    if (
-        not message.reply_to_message
-        and not len(message.command) > 1
-    ):
-        await message.reply(
-            "You need to give the goodbye message some content!"
-        )  
+    if not message.reply_to_message and not len(message.command) > 1:
+        await message.reply("You need to give the goodbye message some content!")
         return
 
     CONTENT, TEXT, DATATYPE = GetWelcomeMessage(message)
 
-    SetGoodBye(
-        ChatID,
-        CONTENT,
-        TEXT,
-        DATATYPE
-    )
+    SetGoodBye(ChatID, CONTENT, TEXT, DATATYPE)
 
-    await message.reply(
-        "The new goodbye message has been saved!",
-        quote=True
-    )
-
-    
-    
+    await message.reply("The new goodbye message has been saved!", quote=True)

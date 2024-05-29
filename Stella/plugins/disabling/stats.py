@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -20,17 +20,14 @@ from Stella import StellaDB
 
 disable = StellaDB.disable
 
+
 def __stats__():
     disable_data = disable.find()
     DISABLED_ITEMS = []
     TOTAL_DISABLE_CHATS = disable.count_documents({})
 
     for chat in disable_data:
-        DISABLED_ITEMS.append(
-            len(chat['disabled_items'])
-        )
-    
-    text = (
-        f"`{sum(DISABLED_ITEMS)}` disabled items, across `{TOTAL_DISABLE_CHATS}` chats.\n"
-    )
+        DISABLED_ITEMS.append(len(chat["disabled_items"]))
+
+    text = f"`{sum(DISABLED_ITEMS)}` disabled items, across `{TOTAL_DISABLE_CHATS}` chats.\n"
     return text

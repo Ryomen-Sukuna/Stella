@@ -2,9 +2,9 @@
 #    Copyright (C) 2021 - meanii (Anil Chauhan)
 #    Copyright (C) 2021 - SpookyGang (Neel Verma, Anil Chauhan)
 
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 3 of the License, or 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
 #    (at your option) any later version.
 
 #    This program is distributed in the hope that it will be useful,
@@ -18,16 +18,18 @@
 
 from enum import Enum, auto
 
+
 class FilterMessageTypeMap(Enum):
     text = auto()
     sticker = auto()
-    animation= auto()
+    animation = auto()
     document = auto()
     photo = auto()
     audio = auto()
     voice = auto()
     video = auto()
     video_note = auto()
+
 
 async def GetFIlterMessage(message):
     data_type = None
@@ -36,90 +38,61 @@ async def GetFIlterMessage(message):
 
     raw_text = message.text or message.caption
     args = raw_text.split(None, 2)
-        
+
     if len(args) >= 3 and not message.reply_to_message:
-        text = message.text.markdown[len(message.command[0]) + len(message.command[1]) + 4 :]
+        text = message.text.markdown[
+            len(message.command[0]) + len(message.command[1]) + 4 :
+        ]
         data_type = FilterMessageTypeMap.text.value
 
-    if (
-        message.reply_to_message
-        and message.reply_to_message.text
-    ):
+    if message.reply_to_message and message.reply_to_message.text:
         if len(args) >= 2:
             text = message.reply_to_message.text.markdown
             data_type = FilterMessageTypeMap.text.value
-            
-    elif (
-        message.reply_to_message
-        and message.reply_to_message.sticker
-    ):
+
+    elif message.reply_to_message and message.reply_to_message.sticker:
         content = message.reply_to_message.sticker.file_id
         data_type = FilterMessageTypeMap.sticker.value
-    
-    elif (
-        message.reply_to_message
-        and message.reply_to_message.animation
-    ):
+
+    elif message.reply_to_message and message.reply_to_message.animation:
         content = message.reply_to_message.animation.file_id
         if message.reply_to_message.caption:
             text = message.reply_to_message.caption.markdown
         data_type = FilterMessageTypeMap.animation.value
-        
-    elif (
-        message.reply_to_message
-        and message.reply_to_message.document
-    ):
+
+    elif message.reply_to_message and message.reply_to_message.document:
         content = message.reply_to_message.document.file_id
-        if message.reply_to_message.caption: 
-            text = message.reply_to_message.caption.markdown 
+        if message.reply_to_message.caption:
+            text = message.reply_to_message.caption.markdown
         data_type = FilterMessageTypeMap.document.value
 
-    elif (
-        message.reply_to_message
-        and message.reply_to_message.photo
-    ):
+    elif message.reply_to_message and message.reply_to_message.photo:
         content = message.reply_to_message.photo.file_id
         if message.reply_to_message.caption:
             text = message.reply_to_message.caption.markdown
         data_type = FilterMessageTypeMap.photo.value
 
-    elif (
-        message.reply_to_message
-        and message.reply_to_message.audio
-    ):
+    elif message.reply_to_message and message.reply_to_message.audio:
         content = message.reply_to_message.audio.file_id
         if message.reply_to_message.caption:
-            text = message.reply_to_message.caption.markdown 
+            text = message.reply_to_message.caption.markdown
         data_type = FilterMessageTypeMap.audio.value
 
-    elif (
-        message.reply_to_message
-        and message.reply_to_message.voice
-    ):
+    elif message.reply_to_message and message.reply_to_message.voice:
         content = message.reply_to_message.voice.file_id
         if message.reply_to_message.caption:
             text = message.reply_to_message.caption.markdown
         data_type = FilterMessageTypeMap.voice.value
 
-    elif (
-        message.reply_to_message
-        and message.reply_to_message.video
-    ):
-        content = message.reply_to_message.video.file_id 
+    elif message.reply_to_message and message.reply_to_message.video:
+        content = message.reply_to_message.video.file_id
         if message.reply_to_message.caption:
-            text = message.reply_to_message.caption.markdown 
-        data_type= FilterMessageTypeMap.video.value
+            text = message.reply_to_message.caption.markdown
+        data_type = FilterMessageTypeMap.video.value
 
-    elif (
-        message.reply_to_message
-        and message.reply_to_message.video_note
-    ):
+    elif message.reply_to_message and message.reply_to_message.video_note:
         content = message.reply_to_message.video_note.file_id
-        text = None 
+        text = None
         data_type = FilterMessageTypeMap.video_note.value
 
-    return (
-        content,
-        text,
-        data_type
-    )
+    return (content, text, data_type)
