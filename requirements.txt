@@ -4,7 +4,7 @@ async-lru==1.0.2
 captcha==0.3
 certifi==2023.7.22
 charset-normalizer==2.0.4
-dnspython==1.16.0
+dnspython==2.6.1
 dynaconf==3.1.5
 emojis==0.6.0
 filelock==3.0.12
