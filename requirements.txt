@@ -2,7 +2,7 @@ appdirs==1.4.4
 APScheduler==3.7.0
 async-lru==1.0.2
 captcha==0.3
-certifi==2023.7.22
+certifi==2024.7.4
 charset-normalizer==2.0.4
 dnspython==2.6.1
 dynaconf==3.1.5
